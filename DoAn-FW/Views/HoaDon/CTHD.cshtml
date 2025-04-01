@@ -1,10 +1,135 @@
-﻿@{ 
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hóa đơn mua hàng</title>
+    <!-- Sử dụng Google Fonts cho kiểu chữ sans-serif hiện đại -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+        /* Thanh Menu */
+        .mainmenu-area {
+            background-color: #333;
+        }
+        .mainmenu-area .nav > li > a {
+            color: #fff;
+            font-weight: 600;
+            padding: 15px 20px;
+        }
+        .mainmenu-area .nav > li.active > a,
+        .mainmenu-area .nav > li > a:hover {
+            background-color: #ff7361;
+        }
+        /* Header Invoice */
+        table.email-container {
+            background-color: #eeeeee;
+        }
+        table.email-container .header {
+            background: linear-gradient(135deg, #ff8a00, #e52e71);
+            padding: 35px;
+            text-align: center;
+        }
+        table.email-container .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0;
+            color: #ffffff;
+        }
+        /* Nội dung chính */
+        table.email-container .content {
+            background-color: #ffffff;
+            padding: 35px;
+        }
+        table.email-container .content h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 25px;
+            color: #333333;
+            text-align: center;
+        }
+        table.email-container .content .info {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px;
+        }
+        table.email-container .content .info-detail {
+            font-size: 16px;
+            font-weight: 400;
+            padding: 15px 10px 5px;
+        }
+        table.email-container .content td {
+            border-collapse: collapse;
+        }
+        table.email-container .content .bg-gray {
+            background-color: #eeeeee;
+        }
+        /* Tổng tiền */
+        table.email-container .content .total-info td {
+            border-top: 3px solid #eeeeee;
+            padding: 10px;
+        }
+        table.email-container .content .total-info .title {
+            font-size: 18px;
+            font-weight: 800;
+        }
+        table.email-container .content .total-info .amount {
+            font-size: 18px;
+            font-weight: 800;
+        }
+        table.email-container .content .final-total {
+            color: #ff7361;
+            font-size: 18px;
+            font-weight: 800;
+            padding: 10px;
+            border-top: 3px solid #eeeeee;
+            border-bottom: 3px solid #eeeeee;
+        }
+        /* Thông tin giao hàng */
+        table.email-container .content .delivery-info p {
+            margin: 0 0 10px;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        table.email-container .content .delivery-info p.title {
+            font-size: 18px;
+            font-weight: 800;
+        }
+        /* Button Quay lại shop với màu khác biệt */
+        .btn-back {
+            font-size: 18px;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            padding: 15px 45px;
+            display: inline-block;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+        }
+        .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+@{ 
     HoaDon HD = new HoaDon();
     HD = ViewBag.HD;
     List<CTHD> listcthd = new List<CTHD>();
     listcthd = ViewBag.CTHD;
     long TongTien = 0;
 }
+<!-- Thanh menu -->
 <div class="mainmenu-area">
     <div class="container">
         <div class="row">
@@ -25,64 +150,41 @@
                         <a href="/TaiKhoan/ThongTinTK">Thông tin cá nhân</a>
                     </li>
                     <li class="active">
-                        <a href="/HoaDon/LichSuHD">
-                            Lịch sử hóa đơn
-                        </a>
+                        <a href="/HoaDon/LichSuHD">Lịch sử hóa đơn</a>
                     </li>
-                    <li><a href="/DSSPMua/DSSPMua">Sản phẩm đã mua</a></li>
+                    <li>
+                        <a href="/DSSPMua/DSSPMua">Sản phẩm đã mua</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 <!-- End mainmenu area -->
-<div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Open Sans, Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
-    For what reason would it be advisable for me to think about business content? That might be little bit risky to have crew member like them.
-</div>
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+<!-- Nội dung Email/Invoice -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="email-container">
     <tr>
-        <td align="center" style="background-color: #eeeeee;" bgcolor="#eeeeee">
+        <td align="center">
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:800px;">
+                <!-- Header -->
                 <tr>
-                    <td align="center" valign="top" style="font-size:0; padding: 35px;" bgcolor="#F44336">
-                        <div style="display:inline-block; max-width:50%; min-width:100px; vertical-align:top; width:100%;">
-                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
-                                <tr>
-                                    <td align="left" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; line-height: 48px;" class="mobile-center">
-                                        <h1 style="font-size: 36px; font-weight: 800; margin: 0; color: #ffffff;">SOASHOP - HÓA ĐƠN THANH TOÁN</h1>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div style="display:inline-block; max-width:50%; min-width:100px; vertical-align:top; width:100%;" class="mobile-hide">
-                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
-                                <tr>
-                                    <td align="right" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; line-height: 48px;">
-                                        <table cellspacing="0" cellpadding="0" border="0" align="right">
-                                            <tr>
-                                                <td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400;">
-                                                    <p style="font-size: 18px; font-weight: 400; margin: 0; color: #ffffff;"><a href="#" target="_blank" style="color: #ffffff; text-decoration: none;">Shop &nbsp;</a></p>
-                                                </td>
-                                                <td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 24px;"> <a href="#" target="_blank" style="color: #ffffff; text-decoration: none;"><img src="https://img.icons8.com/color/48/000000/small-business.png" width="27" height="23" style="display: block; border: 0px;" /></a> </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                    <td align="center" class="header">
+                        <h1>SOASHOP- Hóa đơn mua hàng</h1>
                     </td>
                 </tr>
+                <!-- Nội dung chính -->
                 <tr>
-                    <td align="center" style="padding: 35px 35px 20px 35px; background-color: #ffffff;" bgcolor="#ffffff">
+                    <td align="center" class="content">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:800px;">
                             <tr>
-                                <td align="center" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
-                                    <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="125" height="120" style="display: block; border: 0px;" /><br>
-                                    <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> Cám ơn đơn hàng của bạn! </h2>
+                                <td align="center" style="padding-top: 25px;">
+                                    <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="125" height="120" style="display: block; border: 0;" /><br>
+                                    <h2>Cám ơn đơn hàng của bạn!</h2>
                                 </td>
                             </tr>
                             <tr>
-                                <td width="60%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px;"> 
+                                <td align="left" class="info">
                                     Mã hóa đơn # @HD.MaHD
                                 </td>
                             </tr>
@@ -90,20 +192,26 @@
                                 <td align="left" style="padding-top: 20px;">
                                     <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                         <tr>
-                                            <td width="60%" align="left" bgcolor="#eeeeee" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px;"> Tên sản phẩm</td>
-                                            <td width="15%" align="left" bgcolor="#eeeeee" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px;"> Số lượng </td>
-                                            <td width="25%" align="left" bgcolor="#eeeeee" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px;"> Thành Tiền</td>
+                                            <td width="60%" align="left" class="bg-gray" style="padding: 10px;">
+                                                Tên sản phẩm
+                                            </td>
+                                            <td width="15%" align="left" class="bg-gray" style="padding: 10px;">
+                                                Số lượng
+                                            </td>
+                                            <td width="25%" align="left" class="bg-gray" style="padding: 10px;">
+                                                Thành Tiền
+                                            </td>
                                         </tr>
                                         @foreach (var item in listcthd)
                                         {
                                             <tr>
-                                                <td width="60%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                                <td width="60%" align="left" class="info-detail">
                                                     @item.TenSP
                                                 </td>
-                                                <td width="15%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                                <td width="15%" align="left" class="info-detail">
                                                     @item.SoLuong
                                                 </td>
-                                                <td width="25%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                                <td width="25%" align="left" class="info-detail">
                                                     @string.Format("{0:0,0 đ}", item.ThanhTien)
                                                 </td>
                                                 @{ TongTien += item.ThanhTien; }
@@ -114,21 +222,35 @@
                             </tr>
                             <tr>
                                 <td align="left" style="padding-top: 20px;">
-                                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                    <table cellspacing="0" cellpadding="0" border="0" width="100%" class="total-info">
                                         <tr>
-                                            <td width="75%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee;">
+                                            <td width="75%" align="left" class="title">
                                                 Tổng tiền sản phẩm
                                             </td>
-                                            <td width="25%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee;">
+                                            <td width="25%" align="left" class="amount">
                                                 @string.Format("{0:0,0 đ}", TongTien)
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="75%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px; ">
+                                            <td width="75%" align="left" class="title">
                                                 Giảm
                                             </td>
-                                            <td width="25%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px;">
+                                            <td width="25%" align="left" class="amount">
                                                 @string.Format("{0:0,0 đ}", HD.TongTienTT - TongTien)
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="padding-top: 0px;">
+                                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                        <tr class="final-total">
+                                            <td width="75%" align="left" style="padding: 10px;">
+                                                Tổng tiền phải thanh toán
+                                            </td>
+                                            <td width="25%" align="left" style="padding: 10px;">
+                                                @string.Format("{0:0,0 đ}", HD.TongTienTT)
                                             </td>
                                         </tr>
                                     </table>
@@ -136,14 +258,28 @@
                             </tr>
 
                             <tr>
-                                <td align="left" style="padding-top: 0px;">
+                                <td align="left" style="padding-top: 20px;">
                                     <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                                        <tr style="color: #ff7361;">
-                                            <td width="75%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
-                                                Tổng tiền phải thanh toán
+                                        <tr>
+                                            <td width="100%" align="left" style="padding: 0 35px;">
+                                                <div class="delivery-info">
+                                                    <p class="title">Địa chỉ giao hàng</p>
+                                                    <p>@HD.DiaChiGH</p>
+                                                </div>
                                             </td>
-                                            <td width="25%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
-                                                @string.Format("{0:0,0 đ}", HD.TongTienTT)
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="padding: 0 35px 35px 35px;">
+                                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                        <tr>
+                                            <td width="100%" align="left" style="padding: 0 35px;">
+                                                <div class="delivery-info">
+                                                    <p class="title">Ngày lập hóa đơn:</p>
+                                                    <p>@HD.NgayLapHD.ToString("dd-MM-yyyy")</p>
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>
@@ -152,48 +288,15 @@
                         </table>
                     </td>
                 </tr>
+                <!-- Footer -->
                 <tr>
-                    <td align="left" height="100%" valign="top" width="100%" style="padding: 0 35px 0px 35px; background-color: #ffffff;" bgcolor="#ffffff">
-                        <div style="display:inline-block; max-width:100%; min-width:240px; vertical-align:top; width:100%;">
-                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:530px;">
-                                <tr>
-                                    <td align="left" valign="top" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; ">
-                                        <p style="font-weight: 800; font-size: 18px;">Địa chỉ giao hàng</p>
-                                        <p>@HD.DiaChiGH</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="left" height="100%" valign="top" width="100%" style="padding: 0 35px 35px 35px; background-color: #ffffff;" bgcolor="#ffffff">
-                        <div style="display:inline-block; max-width:100%; min-width:240px; vertical-align:top; width:100%;">
-                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
-                                <tr>
-                                    <td align="left" valign="top" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; ">
-                                        <p style="font-weight: 800; font-size: 18px;">Ngày lập hóa đơn:</p>
-                                        <p>@HD.NgayLapHD.ToString("dd-MM-yyyy")</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center" style=" padding: 35px; background-color: #ff7361;" bgcolor="#1b9ba3">
+                    <td align="center" style="padding: 35px; background-color: #ff7361;">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                             <tr>
                                 <td align="center" style="padding: 25px 0 15px 0;">
-                                    <table border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td align="center" style="border-radius: 5px;" bgcolor="#66b3b7">
-                                                <a href="/Home/Index" style="font-size: 18px; font-family: 'Times New Roman', Times, serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #F44336; padding: 15px 30px; border: 1px solid #F44336; display: block;">
-                                                    Quay lại shop
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <a href="/Home/Index" class="btn-back">
+                                        Quay lại shop
+                                    </a>
                                 </td>
                             </tr>
                         </table>
@@ -204,3 +307,5 @@
         </td>
     </tr>
 </table>
+</body>
+</html>
