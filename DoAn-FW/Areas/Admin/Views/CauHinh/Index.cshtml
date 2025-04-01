@@ -1,50 +1,177 @@
-﻿
-@{
+﻿@{
     <div class="content-wrapper" style="min-height: 639px;">
         <section class="content-header">
-            <h1><i class="glyphicon glyphicon-bookmark"></i> Hệ Thống</h1>
-            <div class="breadcrumb">
-                <button type="submit" class="btn btn-primary btn-sm">
-                    <span class="glyphicon glyphicon-floppy-save"></span>
-                    Lưu
-                </button>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1><i class="fa fa-cogs"></i> Cấu Hình Hệ Thống</h1>
+                    </div>
+                    <div class="col-md-6">
+                        <ol class="breadcrumb brcb float-right">
+                            <li class="breadcrumb-item"><a href="/Admin/HomeAdmin/Index"><i class="fa fa-home"></i> Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Cấu hình</li>
+                        </ol>
+                    </div>
+                </div>
             </div>
         </section>
+
         <!-- Main content -->
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="box" id="view">
+                    <div class="admin-card" id="view">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-primary">
+                                <i class="fa fa-wrench"></i> Thiết lập cấu hình hệ thống
+                            </h3>
+                            <div class="box-tools pull-right">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-save"></i> Lưu thay đổi
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="box-body">
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label> Mail hệ thống</label>
-                                    <input type="email" class="form-control" name="mail_ht" style="width:100%" placeholder="Mail cấu hình" value="sale.smart.store.2021@gmail.com">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="card">
+                                        <div class="card-header bg-light">
+                                            <h4><i class="fa fa-envelope"></i> Cấu hình Email</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="mail_ht"><i class="fa fa-at"></i> Mail hệ thống</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                                    </div>
+                                                    <input type="email" class="form-control" id="mail_ht" name="mail_ht" placeholder="Mail cấu hình" value="sale.smart.store.2021@gmail.com">
+                                                </div>
+                                                <small class="form-text text-muted">Email này sẽ được sử dụng để gửi thông báo từ hệ thống</small>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="mail_ht_password"><i class="fa fa-key"></i> Password Mail hệ thống</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                                    </div>
+                                                    <input type="password" class="form-control" id="mail_ht_password" name="mail_ht_password" placeholder="Password Mail cấu hình" value="123456">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
+                                                            <i class="fa fa-eye"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <small class="form-text text-muted">Mật khẩu được mã hóa khi lưu vào hệ thống</small>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="mail_noreply"><i class="fa fa-reply"></i> Mail admin</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-user-shield"></i></span>
+                                                    </div>
+                                                    <input type="email" class="form-control" id="mail_noreply" name="mail_noreply" placeholder="Mail nhận thông tin đơn hàng" value="NVB@gmail.com">
+                                                </div>
+                                                <small class="form-text text-muted">Email này sẽ nhận thông báo về đơn hàng mới</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mt-4">
+                                        <div class="card-header bg-light">
+                                            <h4><i class="fa fa-globe"></i> Cấu hình Website</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="title"><i class="fa fa-heading"></i> Title</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="title" name="title" placeholder="Tiêu đề website" value="Web site bán hàng điện thoai, máy tính bảng MU">
+                                                </div>
+                                                <small class="form-text text-muted">Tiêu đề sẽ hiển thị trên tab trình duyệt</small>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="description"><i class="fa fa-align-left"></i> Mô tả</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-info-circle"></i></span>
+                                                    </div>
+                                                    <textarea class="form-control" id="description" name="description" rows="3" placeholder="Mô tả website">Không</textarea>
+                                                </div>
+                                                <small class="form-text text-muted">Mô tả ngắn về website cho các công cụ tìm kiếm</small>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Password Mail hệ thống</label>
-                                    <input type="password" class="form-control" name="mail_ht_password" style="width:100%" placeholder=" Password Mail cấu hình" value="123456">
-                                </div>
-                                <div class="form-group">
-                                    <label>Mail admin</label>
-                                    <input type="text" class="form-control" name="mail_noreply" style="width:100%" placeholder="Mail nhận thông tin đơn hàng" value="NVB@gmail.com">
-                                </div>
-                                <div class="form-group">
-                                    <label> Title</label>
-                                    <input type="text" class="form-control" name="title" style="width:100%" placeholder=" title" value="Web site bán hàng điện thoai, máy tính bảng MU">
-                                </div>
-                                <div class="form-group">
-                                    <label> Mô tả</label>
-                                    <input type="text" class="form-control" name="description" style="width:100%" placeholder=" description" value="Không">
+
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header bg-light">
+                                            <h4><i class="fa fa-info-circle"></i> Thông tin hỗ trợ</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="alert alert-info">
+                                                <h5><i class="fa fa-lightbulb"></i> Lưu ý:</h5>
+                                                <p>Các thông tin cấu hình ảnh hưởng trực tiếp đến hoạt động của hệ thống.</p>
+                                                <p>Hãy đảm bảo thông tin chính xác trước khi lưu.</p>
+                                            </div>
+
+                                            <div class="text-center mt-4">
+                                                <img src="~/img/settings.png" alt="Cấu hình" class="img-fluid" style="max-width: 150px;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mt-4">
+                                        <div class="card-header bg-light">
+                                            <h4><i class="fa fa-history"></i> Lịch sử thay đổi</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="timeline">
+                                                <li>
+                                                    <span class="badge badge-primary">01/04/2025</span>
+                                                    <p>Cập nhật mô tả website</p>
+                                                </li>
+                                                <li>
+                                                    <span class="badge badge-primary">24/03/2025</span>
+                                                    <p>Thay đổi email hệ thống</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+
+                        <div class="box-footer">
+                            <div class="text-right">
+                                <button type="reset" class="btn btn-default"><i class="fa fa-undo"></i> Khôi phục</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu thay đổi</button>
+                            </div>
                         </div>
                     </div>
-                </div><!-- /.box -->
+                </div>
             </div>
-            <!-- /.col -->
         </section>
     </div>
+
+    <!-- JavaScript to toggle password visibility -->
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("mail_ht_password");
+            var fieldType = passwordField.type;
+
+            if (fieldType === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
 }
