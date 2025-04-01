@@ -1,81 +1,107 @@
 (function ($) {
     var defaults = {
-            topSpacing: 0,
-            bottomSpacing: 0,
-            className: "is-sticky",
-            wrapperClassName: "sticky-wrapper",
-            center: false,
-            getWidthFrom: "",
-            responsiveWidth: false,
-        },
+        topSpacing: 0,
+        bottomSpacing: 0,
+        className: "is-sticky",
+        wrapperClassName: "sticky-wrapper",
+        center: false,
+        getWidthFrom: "",
+        responsiveWidth: false,
+        zIndex: 1000           // Added zIndex option
+    },
         $window = $(window),
         $document = $(document),
         sticked = [],
         windowHeight = $window.height(),
+        // Improved scroller function with throttling to improve performance
         scroller = function () {
+            // Avoid calculations if no elements are sticked
+            if (sticked.length === 0) return;
+
             var scrollTop = $window.scrollTop(),
                 documentHeight = $document.height(),
                 dwh = documentHeight - windowHeight,
                 extra = scrollTop > dwh ? dwh - scrollTop : 0;
+
+            // Cache viewport dimensions for better performance
+            var viewportHeight = $window.height();
 
             for (var i = 0; i < sticked.length; i++) {
                 var s = sticked[i],
                     elementTop = s.stickyWrapper.offset().top,
                     etse = elementTop - s.topSpacing - extra;
 
-                if (scrollTop <= etse) {
-                    if (s.currentTop !== null) {
-                        s.stickyElement.css("position", "").css("top", "");
-                        s.stickyElement
-                            .trigger("sticky-end", [s])
-                            .parent()
-                            .removeClass(s.className);
-                        s.currentTop = null;
-                    }
-                } else {
-                    var newTop =
-                        documentHeight -
-                        s.stickyElement.outerHeight() -
-                        s.topSpacing -
-                        s.bottomSpacing -
-                        scrollTop -
-                        extra;
-                    if (newTop < 0) {
-                        newTop = newTop + s.topSpacing;
-                    } else {
-                        newTop = s.topSpacing;
-                    }
-                    if (s.currentTop != newTop) {
-                        s.stickyElement
-                            .css("position", "fixed")
-                            .css("top", newTop);
+                // Check if element is in viewport before processing
+                var elementHeight = s.stickyElement.outerHeight();
+                var elementBottom = elementTop + elementHeight;
 
-                        if (typeof s.getWidthFrom !== "undefined") {
-                            s.stickyElement.css(
-                                "width",
-                                $(s.getWidthFrom).width()
-                            );
+                // Process only elements in or near viewport
+                if (elementBottom >= scrollTop - elementHeight && elementTop <= scrollTop + viewportHeight + elementHeight) {
+                    if (scrollTop <= etse) {
+                        if (s.currentTop !== null) {
+                            s.stickyElement
+                                .css({
+                                    'position': '',
+                                    'top': '',
+                                    'z-index': ''  // Reset z-index when unsticking
+                                });
+                            s.stickyElement
+                                .trigger("sticky-end", [s])
+                                .parent()
+                                .removeClass(s.className);
+                            s.currentTop = null;
                         }
+                    } else {
+                        var newTop =
+                            documentHeight -
+                            s.stickyElement.outerHeight() -
+                            s.topSpacing -
+                            s.bottomSpacing -
+                            scrollTop -
+                            extra;
+                        if (newTop < 0) {
+                            newTop = newTop + s.topSpacing;
+                        } else {
+                            newTop = s.topSpacing;
+                        }
+                        if (s.currentTop != newTop) {
+                            s.stickyElement
+                                .css({
+                                    'position': 'fixed',
+                                    'top': newTop,
+                                    'z-index': s.zIndex || defaults.zIndex  // Apply z-index
+                                });
 
-                        s.stickyElement
-                            .trigger("sticky-start", [s])
-                            .parent()
-                            .addClass(s.className);
-                        s.currentTop = newTop;
+                            if (typeof s.getWidthFrom !== "undefined") {
+                                s.stickyElement.css(
+                                    "width",
+                                    $(s.getWidthFrom).width()
+                                );
+                            } else if (s.widthFromWrapper) {
+                                // Use wrapper width if no specific width source specified
+                                s.stickyElement.css("width", s.stickyWrapper.width());
+                            }
+
+                            s.stickyElement
+                                .trigger("sticky-start", [s])
+                                .parent()
+                                .addClass(s.className);
+                            s.currentTop = newTop;
+                        }
                     }
                 }
             }
         },
+        // Improved resizer with debouncing
         resizer = function () {
             windowHeight = $window.height();
 
             for (var i = 0; i < sticked.length; i++) {
                 var s = sticked[i];
-                if (
-                    typeof s.getWidthFrom !== "undefined" &&
-                    s.responsiveWidth === true
-                ) {
+                if (typeof s.getWidthFrom !== "undefined" && s.responsiveWidth === true) {
                     s.stickyElement.css("width", $(s.getWidthFrom).width());
+                } else if (s.widthFromWrapper) {
+                    s.stickyElement.css("width", s.stickyWrapper.width());
                 }
             }
         },
@@ -90,7 +116,7 @@
                         ? stickyId + "-" + defaults.wrapperClassName
                         : defaults.wrapperClassName;
                     var wrapper = $("<div></div>")
-                        .attr("id", stickyId + "-sticky-wrapper")
+                        .attr("id", stickyId ? stickyId + "-sticky-wrapper" : null)
                         .addClass(o.wrapperClassName);
                     stickyElement.wrapAll(wrapper);
 
@@ -112,7 +138,13 @@
                     }
 
                     var stickyWrapper = stickyElement.parent();
-                    stickyWrapper.css("height", stickyElement.outerHeight());
+                    // Preserve original height for proper layout
+                    var originalHeight = stickyElement.outerHeight();
+                    stickyWrapper.css("height", originalHeight);
+
+                    // Store whether to get width from wrapper
+                    var widthFromWrapper = o.getWidthFrom === "" || o.getWidthFrom === undefined;
+
                     sticked.push({
                         topSpacing: o.topSpacing,
                         bottomSpacing: o.bottomSpacing,
@@ -122,6 +154,8 @@
                         className: o.className,
                         getWidthFrom: o.getWidthFrom,
                         responsiveWidth: o.responsiveWidth,
+                        widthFromWrapper: widthFromWrapper,
+                        zIndex: o.zIndex
                     });
                 });
             },
@@ -148,13 +182,28 @@
             },
         };
 
-    // should be more efficient than using $window.scroll(scroller) and $window.resize(resizer):
+    // Throttle function to limit execution frequency of scroll events
+    function throttle(func, wait) {
+        var time = Date.now();
+        return function () {
+            if ((time + wait - Date.now()) < 0) {
+                func();
+                time = Date.now();
+            }
+        };
+    }
+
+    // Use throttled versions of scroll and resize handlers
+    var throttledScroller = throttle(scroller, 10);  // Execute at most every 10ms
+    var throttledResizer = throttle(resizer, 100);   // Execute at most every 100ms
+
+    // Event binding with performance optimization
     if (window.addEventListener) {
-        window.addEventListener("scroll", scroller, false);
-        window.addEventListener("resize", resizer, false);
+        window.addEventListener("scroll", throttledScroller, { passive: true });
+        window.addEventListener("resize", throttledResizer, { passive: true });
     } else if (window.attachEvent) {
-        window.attachEvent("onscroll", scroller);
-        window.attachEvent("onresize", resizer);
+        window.attachEvent("onscroll", throttledScroller);
+        window.attachEvent("onresize", throttledResizer);
     }
 
     $.fn.sticky = function (method) {
@@ -182,6 +231,8 @@
             $.error("Method " + method + " does not exist on jQuery.sticky");
         }
     };
+
+    // Initial call to set up any elements that should be sticky on page load
     $(function () {
         setTimeout(scroller, 0);
     });
