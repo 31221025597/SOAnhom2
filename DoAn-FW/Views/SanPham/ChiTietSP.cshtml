@@ -6,6 +6,10 @@
     List<Object> ListPK = ViewData["ListPK"] as List<object>; //*list phụ kiện để sử dụng */
     KhachHang kh = ViewBag.KH;
 }
+
+<!-- Include external CSS file -->
+<link href="~/css/product-detail.css" rel="stylesheet" type="text/css" />
+
 <div class="mainmenu-area">
     <div class="container">
         <div class="row">
@@ -53,9 +57,9 @@
             <div class="col-md-12">
                 <div class="product-content-right">
                     <div class="product-breadcroumb">
-                        <a href="">Home</a>
-                        <a href="">Category Name</a>
-                        <a href="">Điện thoại</a>
+                        <a href="/Home/Index"><i class="fa fa-home"></i> Trang chủ</a>
+                        <a href="/SanPham/Products">Sản phẩm</a>
+                        <a href="#">@ctsp.GetType().GetProperty("LoaiSP").GetValue(ctsp, null).ToString()</a>
                     </div>
 
                     <div class="row">
@@ -68,7 +72,6 @@
                                          xoriginal="@ctsp.GetType().GetProperty("HinhAnh").GetValue(ctsp,null)" />
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="col-sm-6">
@@ -88,12 +91,12 @@
                                     }
                                 </div>
                                 <form action="/GioHang/InsertCart" class="cart">
-                                    <input style="display : none" name="MaTTSP" value="@ctsp.GetType().GetProperty("MaTTSP").GetValue(ctsp, null).ToString()">
-                                    <input style="display : none" name="MaKH" value="@kh.MaKH">
-                                    <input style="display : none" name="MaLoaiSP" value="@ctsp.GetType().GetProperty("MaLoaiSP").GetValue(ctsp, null).ToString()">
-                                    <input style="display : none" name="SLTon" value="@ctsp.GetType().GetProperty("SoLuong").GetValue(ctsp, null).ToString()">
+                                    <input style="display: none" name="MaTTSP" value="@ctsp.GetType().GetProperty("MaTTSP").GetValue(ctsp, null).ToString()">
+                                    <input style="display: none" name="MaKH" value="@kh.MaKH">
+                                    <input style="display: none" name="MaLoaiSP" value="@ctsp.GetType().GetProperty("MaLoaiSP").GetValue(ctsp, null).ToString()">
+                                    <input style="display: none" name="SLTon" value="@ctsp.GetType().GetProperty("SoLuong").GetValue(ctsp, null).ToString()">
                                     <div class="quantity">
-                                        <label for="">Số lượng</label>
+                                        <label for=""><i class="fa fa-shopping-basket"></i> Số lượng</label>
                                         <input type="number"
                                                size="4"
                                                class="input-text qty text"
@@ -104,11 +107,11 @@
                                                step="1" />
                                     </div>
                                     <div class="quantity">
-                                        <label for="">Số lượng còn: @ctsp.GetType().GetProperty("SoLuong").GetValue(ctsp, null) </label>
+                                        <label for=""><i class="fa fa-database"></i> Số lượng còn: <span style="color: #3498db; font-weight: bold;">@ctsp.GetType().GetProperty("SoLuong").GetValue(ctsp, null)</span></label>
                                     </div>
                                     <button class="add_to_cart_button"
                                             type="submit">
-                                        Thêm vào giỏ
+                                        <i class="fa fa-shopping-cart"></i> Thêm vào giỏ
                                     </button>
                                 </form>
 
@@ -120,68 +123,61 @@
                                             <a href="#home"
                                                aria-controls="home"
                                                role="tab"
-                                               data-toggle="tab">Description</a>
+                                               data-toggle="tab"><i class="fa fa-info-circle"></i> Thông số kỹ thuật</a>
                                         </li>
                                         <li role="presentation">
                                             <a href="#profile"
                                                aria-controls="profile"
                                                role="tab"
-                                               data-toggle="tab">Reviews</a>
+                                               data-toggle="tab"><i class="fa fa-comments"></i> Đánh giá</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
                                         <div role="tabpanel"
-                                             class="
-                                                        tab-pane
-                                                        fade
-                                                        in
-                                                        active
-                                                    "
+                                             class="tab-pane fade in active"
                                              id="home">
                                             <h2>Thông số kĩ thuật</h2>
-                                            <table class="table table-striped">
-                                                    <tr>
-                                                        <td> Loại sản phẩm</td>
-                                                        <td> @ctsp.GetType().GetProperty("LoaiSP").GetValue(ctsp, null).ToString()</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> Thương hiệu </td>
-                                                        <td> @ctsp.GetType().GetProperty("TenTH").GetValue(ctsp, null).ToString()</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td> Màu Sắc </td>
-                                                        <td> @ctsp.GetType().GetProperty("Mausac").GetValue(ctsp, null).ToString()</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td> Ram </td>
-                                                        <td> @ctsp.GetType().GetProperty("Ram").GetValue(ctsp, null).ToString() GB</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> Bộ nhớ trong </td>
-                                                        <td> @ctsp.GetType().GetProperty("Bonhotrong").GetValue(ctsp, null).ToString() GB</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> Pin </td>
-                                                        <td> @ctsp.GetType().GetProperty("Pin").GetValue(ctsp, null).ToString() mAh</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> Kích thước màn hình </td>
-                                                        <td> @ctsp.GetType().GetProperty("Kichthuocmanhinh").GetValue(ctsp, null).ToString() inch</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> Camera trước </td>
-                                                        <td> @ctsp.GetType().GetProperty("Cameratruoc").GetValue(ctsp, null).ToString()</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> Camera sau </td>
-                                                        <td> @ctsp.GetType().GetProperty("Camerasau").GetValue(ctsp, null).ToString()</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> CPU </td>
-                                                        <td> @ctsp.GetType().GetProperty("Cpu").GetValue(ctsp, null).ToString() </td>
-                                                    </tr>
+                                            <table class="specs-table">
+                                                <tr>
+                                                    <td><i class="fa fa-mobile"></i> Loại sản phẩm</td>
+                                                    <td>@ctsp.GetType().GetProperty("LoaiSP").GetValue(ctsp, null).ToString()</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-trademark"></i> Thương hiệu</td>
+                                                    <td>@ctsp.GetType().GetProperty("TenTH").GetValue(ctsp, null).ToString()</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-paint-brush"></i> Màu Sắc</td>
+                                                    <td>@ctsp.GetType().GetProperty("Mausac").GetValue(ctsp, null).ToString()</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-memory"></i> Ram</td>
+                                                    <td>@ctsp.GetType().GetProperty("Ram").GetValue(ctsp, null).ToString() GB</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-hdd"></i> Bộ nhớ trong</td>
+                                                    <td>@ctsp.GetType().GetProperty("Bonhotrong").GetValue(ctsp, null).ToString() GB</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-battery-full"></i> Pin</td>
+                                                    <td>@ctsp.GetType().GetProperty("Pin").GetValue(ctsp, null).ToString() mAh</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-tv"></i> Kích thước màn hình</td>
+                                                    <td>@ctsp.GetType().GetProperty("Kichthuocmanhinh").GetValue(ctsp, null).ToString() inch</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-camera"></i> Camera trước</td>
+                                                    <td>@ctsp.GetType().GetProperty("Cameratruoc").GetValue(ctsp, null).ToString()</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-camera-retro"></i> Camera sau</td>
+                                                    <td>@ctsp.GetType().GetProperty("Camerasau").GetValue(ctsp, null).ToString()</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-microchip"></i> CPU</td>
+                                                    <td>@ctsp.GetType().GetProperty("Cpu").GetValue(ctsp, null).ToString()</td>
+                                                </tr>
                                             </table>
                                         </div>
                                         <div role="tabpanel"
@@ -193,13 +189,11 @@
                                             <form class="submit-review" action="/BinhLuan/ThemBinhLuan" method="post">
                                                 <p>
                                                     <label for="review">
-                                                        Bình luận -
-                                                        Đánh giá của bạn
-                                                        về sản
-                                                        phẩm
+                                                        <i class="fa fa-comment"></i> Bình luận -
+                                                        Đánh giá của bạn về sản phẩm
                                                     </label>
-                                                    <input style="display : none" name="MaTTSP" value="@ctsp.GetType().GetProperty("MaTTSP").GetValue(ctsp,null)">
-                                                    <input style="display : none" name="MaKH" value="@kh.MaKH">
+                                                    <input style="display: none" name="MaTTSP" value="@ctsp.GetType().GetProperty("MaTTSP").GetValue(ctsp,null)">
+                                                    <input style="display: none" name="MaKH" value="@kh.MaKH">
                                                     <textarea name="NoiDung"
                                                               id="NoiDung"
                                                               cols="30"
@@ -207,7 +201,7 @@
                                                 </p>
                                                 <p>
                                                     <input type="submit"
-                                                           value="Đăng" />
+                                                           value="Đăng bình luận" />
                                                 </p>
                                             </form>
                                         </div>
@@ -219,56 +213,49 @@
                     <div class="related-products-wrapper">
                         <h2 class="related-products-title">
                             Sản phẩm mua kèm
-                            <div class="related-products-carousel">
-                                @foreach (var dt in ListPK)
-                                {
-                                    <div class="single-product">
-                                        <div class="product-f-image">
-                                            <img src="@dt.GetType().GetProperty("HinhAnh").GetValue(dt, null)"
-                                                 alt="" />
-                                            <div class="product-hover">
-                                                <a href="/GioHang/InsertCart2?id1=@dt.GetType().GetProperty("MaTTSP").GetValue(dt,null).ToString()&id2=@ctsp.GetType().GetProperty("MaTTSP").GetValue(ctsp,null).ToString()&MaLoaiSP=@ctsp.GetType().GetProperty("MaLoaiSP").GetValue(ctsp,null).ToString()"
-                                                   class="add-to-cart-link">
-                                                    <i class="
-                                                                fa fa-shopping-cart
-                                                                        "></i>
-                                                    Thêm vào giỏ
-                                                </a>
-                                                <a href="/SanPham/ChiTietSP?t=@dt.GetType().GetProperty("MaTTSP").GetValue(dt,null).ToString()&l=@ctsp.GetType().GetProperty("MaLoaiSP").GetValue(ctsp,null).ToString()"
-                                                   class="view-details-link">
-                                                    <i class="fa fa-link"></i>
-                                                    Xem chi tiết
-                                                </a>
-                                            </div>
-                                        </div>
-                    
-                                        <h2>
-                                            <a href="/SanPham/ChiTietSP?t=@dt.GetType().GetProperty("MaTTSP").GetValue(dt, null).ToString()">
-                                                @dt.GetType().GetProperty("TenSP").GetValue(dt, null).ToString()
-                                            </a>
-                                        </h2>
-                                        <!--
-                                        <h4>
-                                        @dt.GetType().GetProperty("MauSac").GetValue(dt, null).ToString()-
-                                        @dt.GetType().GetProperty("Ram").GetValue(dt, null).ToString()GB-
-                                        @dt.GetType().GetProperty("BoNhoTrong").GetValue(dt, null).ToString()GB
-                                        </h4>
-                                        -->
-                                        <div class="product-carousel-price">
+                        </h2>
+                        <div class="related-products-carousel">
+                            @foreach (var dt in ListPK)
+                            {
+                                <div class="product-item" onclick="window.location.href='/SanPham/ChiTietSP?t=@dt.GetType().GetProperty("MaTTSP").GetValue(dt, null).ToString()&l=@ctsp.GetType().GetProperty("MaLoaiSP").GetValue(ctsp,null).ToString()'">
+                                    <div class="product-image">
+                                        <img src="@dt.GetType().GetProperty("HinhAnh").GetValue(dt, null)"
+                                             alt="" />
+                                    </div>
+
+                                    <div class="product-title">
+                                        <a href="/SanPham/ChiTietSP?t=@dt.GetType().GetProperty("MaTTSP").GetValue(dt, null).ToString()">
+                                            @dt.GetType().GetProperty("TenSP").GetValue(dt, null).ToString()
+                                        </a>
+                                    </div>
+
+                                    <div class="product-specs">
+                                        <span class="spec-pill">
+                                            @dt.GetType().GetProperty("MauSac").GetValue(dt, null).ToString()
+                                        </span>
+                                    </div>
+
+                                    <div class="price-cart-container">
+                                        <div class="product-price">
                                             @if (int.Parse(@dt.GetType().GetProperty("GiaKM").GetValue(dt, null).ToString()) > 0)
                                             {
-                                                <ins>@string.Format("{0:0,0 đ}", dt.GetType().GetProperty("GiaKM").GetValue(dt, null))</ins>
-                                                <del>@string.Format("{0:0,0 đ}", dt.GetType().GetProperty("Gia").GetValue(dt, null))</del>
+                                                <span class="original-price">@string.Format("{0:0,0 đ}", dt.GetType().GetProperty("Gia").GetValue(dt, null))</span>
+                                                <span class="sale-price">@string.Format("{0:0,0 đ}", dt.GetType().GetProperty("GiaKM").GetValue(dt, null))</span>
                                             }
                                             else
                                             {
-                                                <ins>@string.Format("{0:0,0 đ}", dt.GetType().GetProperty("Gia").GetValue(dt, null))</ins>
+                                                <span class="sale-price">@string.Format("{0:0,0 đ}", dt.GetType().GetProperty("Gia").GetValue(dt, null))</span>
                                             }
                                         </div>
+
+                                        <a href="/GioHang/InsertCart2?id1=@dt.GetType().GetProperty("MaTTSP").GetValue(dt,null).ToString()&id2=@ctsp.GetType().GetProperty("MaTTSP").GetValue(ctsp,null).ToString()&MaLoaiSP=@ctsp.GetType().GetProperty("MaLoaiSP").GetValue(ctsp,null).ToString()"
+                                           class="cart-button" onclick="event.stopPropagation();">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </a>
                                     </div>
-                                }
-                            </div>
-                        </h2>
+                                </div>
+                            }
+                        </div>
                     </div>
                     <div class="maincontent-area">
                         <div class="zigzag-bottom"></div>
@@ -277,55 +264,53 @@
                                 <div class="col-md-12">
                                     <div class="latest-product">
                                         <h2 class="related-products-title">Sản phẩm liên quan</h2>
-                                        <div class="product-carousel">
+                                        <div class="products-container">
                                             @foreach (var item in ListDT)
-
                                             {
-                                                <div class="single-product">
-                                                    <div class="product-f-image">
+                                                <div class="product-item" onclick="window.location.href='/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()&l=@item.GetType().GetProperty("MaLoaiSP").GetValue(item,null).ToString()'">
+                                                    <div class="product-image">
                                                         <img src="@item.GetType().GetProperty("HinhAnh").GetValue(item,null).ToString()" alt="" />
-                                                        <div class="product-hover">
-                                                            <a href="/GioHang/InsertCart3?id=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()" class="add-to-cart-link">
-                                                                <i class="fa fa-shopping-cart"></i>
-                                                                Thêm vào giỏ
-                                                            </a>
-                                                            <a href="/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()&l=@item.GetType().GetProperty("MaLoaiSP").GetValue(item,null).ToString()"
-                                                               class="view-details-link">
-                                                                <i class="fa fa-link"></i> 
-                                                                Xem chi tiết
-                                                            </a>
-                                                        </div>
                                                     </div>
 
-                                                    <h2>
+                                                    <div class="product-title">
                                                         <a href="/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()&l=@item.GetType().GetProperty("MaLoaiSP").GetValue(item,null).ToString()">
-                                                            <p>
-                                                                @item.GetType().GetProperty("TenSP").GetValue(item, null).ToString()
-                                                            </p>
-                                                            @item.GetType().GetProperty("MauSac").GetValue(item, null).ToString()-
-                                                            @item.GetType().GetProperty("Ram").GetValue(item, null).ToString()GB-
-                                                            @item.GetType().GetProperty("BoNhoTrong").GetValue(item, null).ToString()GB
+                                                            @item.GetType().GetProperty("TenSP").GetValue(item, null).ToString()
                                                         </a>
-                                                    </h2>
+                                                    </div>
 
-                                                    <div class="product-carousel-price">
-                                                        @if (int.Parse(item.GetType().GetProperty("GiaKM").GetValue(item, null).ToString()) > 0)
+                                                    <div class="product-specs">
+                                                        <span class="spec-pill">
+                                                            @item.GetType().GetProperty("MauSac").GetValue(item, null).ToString()
+                                                        </span>
+                                                        <span class="spec-pill">
+                                                            @item.GetType().GetProperty("Ram").GetValue(item, null).ToString()GB
+                                                        </span>
+                                                        <span class="spec-pill">
+                                                            @item.GetType().GetProperty("BoNhoTrong").GetValue(item, null).ToString()GB
+                                                        </span>
+                                                    </div>
 
-                                                        {
-                                                            <del>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</del>
-                                                            <br />
-                                                            <ins>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("GiaKM").GetValue(item, null))</ins>
-                                                        }
+                                                    <div class="price-cart-container">
+                                                        <div class="product-price">
+                                                            @if (int.Parse(item.GetType().GetProperty("GiaKM").GetValue(item, null).ToString()) > 0)
+                                                            {
+                                                                <span class="original-price">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</span>
+                                                                <span class="sale-price">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("GiaKM").GetValue(item, null))</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="sale-price">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</span>
+                                                            }
+                                                        </div>
 
-                                                        else
-
-                                                        {
-                                                            <ins>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</ins>
-                                                        }
+                                                        <a href="/GioHang/InsertCart3?id=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()" class="cart-button" onclick="event.stopPropagation();">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             }
                                         </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -339,19 +324,16 @@
                         <div>
                             @foreach (var bl in ListBL)
                             {
-                                <div>
-                                    <div class="well">
-                                        <div class="media" style="width: 150px;">
-                                            <a href="#">
-                                                <img class="media-object" src="~/img/profile.png"
-                                                     alt="..." style="margin-left: 15px;" />
-                                                <h6 style="margin-top: 10px;">@bl.GetType().GetProperty("TenKH").GetValue(bl, null).ToString()</h6>
-                                            </a>
-                                        </div>
-                                        <p class="binhluantext">
-                                            @bl.GetType().GetProperty("NoiDung").GetValue(bl, null).ToString()
-                                        </p>
+                                <div class="well">
+                                    <div class="media">
+                                        <a href="#">
+                                            <img class="media-object" src="~/img/profile.png" alt="User Profile" />
+                                            <h6>@bl.GetType().GetProperty("TenKH").GetValue(bl, null).ToString()</h6>
+                                        </a>
                                     </div>
+                                    <p class="binhluantext">
+                                        @bl.GetType().GetProperty("NoiDung").GetValue(bl, null).ToString()
+                                    </p>
                                 </div>
                             }
                         </div>
@@ -362,6 +344,83 @@
     </div>
 </div>
 
+<!-- Add the necessary scripts -->
 <script>
-    $(".xzoom").xzoom({ tint: '#333', Xoffset: 15 });
+    // Initialize xzoom plugin when document is ready
+    $(document).ready(function() {
+        $(".xzoom").xzoom({ tint: '#333', Xoffset: 15 });
+
+        // Smooth scrolling for anchor links
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this.hash);
+
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 70
+                }, 500);
+            }
+        });
+
+        // Add a hover effect to specification rows
+        $('.specs-table tr').hover(
+            function() {
+                $(this).css('background-color', '#e9f7fe');
+            },
+            function() {
+                // Reset to original color based on odd/even
+                if ($(this).index() % 2 == 0) {
+                    $(this).css('background-color', '#f2f6ff');
+                } else {
+                    $(this).css('background-color', '#fff');
+                }
+            }
+        );
+
+        // Product slider navigation - cải thiện hiệu ứng trượt
+        const container = $('.products-container');
+        const itemWidth = 305; // Chiều rộng item + margin
+
+        // Xác định số lượng sản phẩm hiển thị dựa trên chiều rộng container
+        const containerWidth = container.width();
+        const visibleItems = Math.floor(containerWidth / itemWidth) || 1;
+
+        $('.next-button').on('click', function(e) {
+            e.preventDefault();
+            container.animate({
+                scrollLeft: '+=' + (itemWidth * Math.min(visibleItems, 2))
+            }, 300, 'swing');
+        });
+
+        $('.prev-button').on('click', function(e) {
+            e.preventDefault();
+            container.animate({
+                scrollLeft: '-=' + (itemWidth * Math.min(visibleItems, 2))
+            }, 300, 'swing');
+        });
+
+        // Kiểm tra nếu có thanh cuộn để hiển thị/ẩn nút điều hướng
+        function checkScrollButtons() {
+            const scrollLeft = container.scrollLeft();
+            const scrollWidth = container[0].scrollWidth;
+            const width = container.outerWidth();
+
+            if (scrollLeft <= 0) {
+                $('.prev-button').css('opacity', '0.5');
+            } else {
+                $('.prev-button').css('opacity', '1');
+            }
+
+            if (scrollLeft + width >= scrollWidth - 10) {
+                $('.next-button').css('opacity', '0.5');
+            } else {
+                $('.next-button').css('opacity', '1');
+            }
+        }
+
+        // Gọi hàm khi cuộn
+        container.on('scroll', checkScrollButtons);
+        // Gọi hàm khi trang được tải
+        $(window).on('load', checkScrollButtons);
+    });
 </script>
