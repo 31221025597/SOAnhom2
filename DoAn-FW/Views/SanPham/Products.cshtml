@@ -9,6 +9,7 @@
     KhachHang kh = ViewBag.KH;
     Pager pager = new Pager();
 
+
     int pageNo = 0;
     if (ViewBag.Pager != null)
     {
@@ -16,130 +17,172 @@
         pageNo = pager.CurrentPage;
     }
 }
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>@ViewData["Title"] - My Shop</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-        /* Các style dùng cho giao diện sản phẩm */
-        .product-card {
-            margin-bottom: 20px;
+
+<style>
+    /* CSS cho main menu */
+    .mainmenu-area {
+        background: #1e3c72;
+        padding: 15px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        margin-bottom: 30px;
+    }
+
+        .mainmenu-area .navbar-nav > li > a {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 15px;
+            transition: color 0.3s;
         }
 
-        .card {
-            border: 1px solid #ddd;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background: #fff;
-            border-radius: 8px; /* Bo tròn nhẹ */
-            overflow: hidden; /* Đảm bảo các phần tử bên trong không vượt ra ngoài */
-            height: 100%; /* Đồng nhất chiều cao card */
-        }
-
-            .card:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            .mainmenu-area .navbar-nav > li > a:hover,
+            .mainmenu-area .navbar-nav > li.active > a {
+                color: #ffd700;
             }
 
-        .card-img-top {
-            height: 250px;
-            object-fit: cover; /* Làm đầy khung hình mà không làm méo ảnh */
-            width: 100%;
-        }
+    /* Title Area */
+    .product-big-title-area {
+        background: url('/Content/Images/news-bg.jpg') no-repeat center center;
+        background-size: cover;
+        padding: 60px 0;
+        box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.3);
+        margin-bottom: 30px;
+    }
 
-        .card-body {
+        .product-big-title-area .product-bit-title h2 {
+            color: #fff;
+            font-size: 36px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin: 0;
             text-align: center;
-            min-height: 150px; /* Đảm bảo đồng nhất kích thước phần thân card */
         }
 
-        .card-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+    /* CSS cho sản phẩm */
+    .product-card-col {
+        padding: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .single-shop-product {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        padding: 15px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        height: 100%;
+    }
+
+        .single-shop-product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
 
-        .card-text {
-            font-size: 1rem;
+    .product-upper img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .product-title h2 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .product-title a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+        .product-title a:hover {
+            color: #1e90ff;
         }
 
-        .price del {
-            font-size: 1.2rem;
+    .product-details h4 {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        margin: 10px 0;
+    }
+
+        .product-price del {
+            color: #888;
+            margin-right: 5px;
         }
 
-        .price ins {
-            font-size: 1.4rem;
+        .product-price ins {
+            color: #e74c3c;
             font-weight: bold;
         }
 
-        .card-footer {
-            background: #fff;
-            border-top: none;
-            text-align: center;
-            padding: 10px;
-        }
+    .product-option-shop a {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        background: #1e90ff;
+        color: #fff;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
 
-            .card-footer .btn {
-                border-radius: 20px;
-                padding: 8px 20px;
-                font-size: 1rem;
-                transition: background 0.3s ease, transform 0.3s ease;
-            }
-
-                .card-footer .btn:hover {
-                    transform: scale(1.05);
-                }
-        /* Kiểu icon cart: dùng glyphicon của Bootstrap */
-        .btn .glyphicon-shopping-cart {
-            margin-right: 5px;
-            font-size: 1.2rem;
+        .product-option-shop a:hover {
+            background: #0d74d1;
         }
-    </style>
-</head>
-<body>
-    <!-- Main Menu Area -->
-    <div class="mainmenu-area">
-        <div class="container">
-            <div class="row">
-                <div class="navbar-header">
-                    <button type="button"
-                            class="navbar-toggle"
-                            data-toggle="collapse"
-                            data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/Home/Index">Trang chủ</a></li>
-                        <li class="active"><a href="/SanPham/Products">Sản phẩm</a></li>
-                        <li><a href="/TinTuc/DanhSachTinTuc">Tin tức</a></li>
-                    </ul>
+</style>
+
+<!-- Mainmenu area -->
+<div class="mainmenu-area">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-header">
+                <button type="button"
+                        class="navbar-toggle"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Home/Index">Trang chủ</a></li>
+                    <li class="active"><a href="/SanPham/Products">Sản phẩm</a></li>
+                    <li><a href="/TinTuc/DanhSachTinTuc">Tin tức</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End mainmenu area -->
+<!-- Title Area -->
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Danh sách sản phẩm</h2>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End mainmenu area -->
-    <!-- Title Area -->
-    <div class="product-big-title-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-bit-title text-center">
-                        <h2>Danh sách sản phẩm</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
-    <!-- Content Area -->
-    <div class="single-product-area">
-        <div class="container">
-            <!-- Search và Sắp xếp -->
-            <div class="row">
+<div class="single-product-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
                 <div class="col-sm-9">
                     <form action="/SanPham/Products">
                         <input type="search" name="search" class="form-control" placeholder="Search" style="float: left; width: 80%; margin-bottom: 20px;" />
@@ -162,7 +205,6 @@
             </div>
 
             <div class="row">
-                <!-- Bộ lọc sản phẩm -->
                 <div class="col-sm-3">
                     <form action="/SanPham/Products" method="get">
                         <div class="left-sidebar">
@@ -171,14 +213,15 @@
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordian" href="#ram">
-                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                <span class="badge pull-right">
+                                                    <i class="fa fa-plus"></i>
+                                                </span>
                                                 <strong>BỘ LỌC</strong>
                                             </a>
                                         </h3>
                                     </div>
                                     <div id="ram" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <!-- Loại sản phẩm -->
                                             <div class="panel-heading">
                                                 <h3 class="panel-title"><b>Loại sản phẩm</b></h3>
                                             </div>
@@ -194,7 +237,6 @@
                                                 </ul>
                                             </div>
                                             <hr />
-                                            <!-- Ram -->
                                             <div class="panel-heading">
                                                 <h3 class="panel-title"><b>Ram</b></h3>
                                             </div>
@@ -210,7 +252,6 @@
                                                 </ul>
                                             </div>
                                             <hr />
-                                            <!-- Bộ nhớ trong -->
                                             <div class="panel-heading">
                                                 <h3 class="panel-title"><b>Bộ nhớ trong</b></h3>
                                             </div>
@@ -226,7 +267,6 @@
                                                 </ul>
                                             </div>
                                             <hr />
-                                            <!-- Màn hình -->
                                             <div class="panel-heading">
                                                 <h3 class="panel-title"><b>Màn hình</b></h3>
                                             </div>
@@ -242,7 +282,6 @@
                                                 </ul>
                                             </div>
                                             <hr />
-                                            <!-- Hãng -->
                                             <div class="panel-heading">
                                                 <h3 class="panel-title"><b>Hãng</b></h3>
                                             </div>
@@ -267,45 +306,52 @@
                     </form>
                 </div>
 
-                <!-- Hiển thị sản phẩm -->
                 <div class="col-sm-9 padding-right">
                     @foreach (var item in Model)
                     {
-                        <div class="col-md-4 col-sm-6 product-card">
-                            <div class="card h-100">
-                                <img src="@item.GetType().GetProperty("HinhAnh").GetValue(item, null).ToString()" class="card-img-top" alt="Hình ảnh sản phẩm">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        @item.GetType().GetProperty("TenSP").GetValue(item, null).ToString()
-                                    </h5>
-                                    <p class="card-text">
+                        <div class="col-md-4 col-sm-6 product-card-col">
+                            <div class="single-shop-product">
+                                <div class="product-upper">
+                                    <img src="@item.GetType().GetProperty("HinhAnh").GetValue(item, null).ToString()" alt="Hình ảnh sản phẩm" />
+                                </div>
+                                <div class="product-title">
+                                    <h2>
+                                        <a href="/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item, null).ToString()&l=@item.GetType().GetProperty("MaLoaiSP").GetValue(item, null)">
+                                            @item.GetType().GetProperty("TenSP").GetValue(item, null).ToString()
+                                        </a>
+                                    </h2>
+                                </div>
+                                <div class="product-details">
+                                    <h4>
                                         @item.GetType().GetProperty("MauSac").GetValue(item, null).ToString() -
                                         @item.GetType().GetProperty("Ram").GetValue(item, null).ToString()GB -
                                         @item.GetType().GetProperty("BoNhoTrong").GetValue(item, null).ToString()GB
-                                    </p>
-                                    <div class="price">
-                                        @if (int.Parse(item.GetType().GetProperty("GiaKM").GetValue(item, null).ToString()) > 0)
-                                        {
-                                            <p><del class="text-muted">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</del></p>
-                                            <p><ins class="text-danger">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("GiaKM").GetValue(item, null))</ins></p>
-                                        }
-                                        else
-                                        {
-                                            <p><ins class="text-primary">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</ins></p>
-                                        }
-                                    </div>
+                                    </h4>
                                 </div>
-                                <div class="card-footer">
-                                    <button type="button" class="btn btn-success add-to-cart" data-id="@item.GetType().GetProperty("MaTTSP").GetValue(item, null)">
-                                        <span class="glyphicon glyphicon-shopping-cart"></span> Thêm vào giỏ hàng
-                                    </button>
+                                <div class="product-price">
+                                    @if (int.Parse(item.GetType().GetProperty("GiaKM").GetValue(item, null).ToString()) > 0)
+                                    {
+                                        <del>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</del>
+                                        <br />
+                                        <ins>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("GiaKM").GetValue(item, null))</ins>
+                                    }
+                                    else
+                                    {
+                                        <del style="height: 74px; width: 150px"></del>
+                                        <ins>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</ins>
+                                    }
+                                </div>
+                                <div class="product-option-shop">
+                                    <a href="/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item, null)&l=@item.GetType().GetProperty("MaTH").GetValue(item, null)">
+                                        Xem chi tiết
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     }
                 </div>
             </div>
-            <!-- Phân trang -->
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-pagination text-center">
@@ -313,17 +359,22 @@
                             @if (pager.TotalPages > 0)
                             {
                                 <ul class="pagination">
+                                    <!-- Link đến Trang trước -->
                                     <li>
                                         <a href="javascript:void(0);" onclick="navigatePage(@(pager.CurrentPage - 1))" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
+
+                                    <!-- Liệt kê các trang -->
                                     @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
                                     {
                                         <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
                                             <a class="page-link" href="javascript:void(0);" onclick="navigatePage(@pge)">@pge</a>
                                         </li>
                                     }
+
+                                    <!-- Link đến Trang sau -->
                                     <li>
                                         <a href="javascript:void(0);" onclick="navigatePage(@(pager.CurrentPage + 1))" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
@@ -335,87 +386,91 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+</div>
 
-    <!-- Script xử lý phân trang, sắp xếp và lọc -->
-    <script>
-        function navigatePage(pageNumber) {
-            var currentUrl = window.location.href;
-            var cleanUrl = currentUrl.replace(/([?&]pg=\d+)/, '');
-            var newUrl = cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'pg=' + pageNumber;
-            window.location.href = newUrl;
+<script>
+    function navigatePage(pageNumber) {
+        var currentUrl = window.location.href;
+        var cleanUrl = currentUrl.replace(/([?&]pg=\d+)/, '');
+        var newUrl = cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'pg=' + pageNumber;
+        window.location.href = newUrl;
+    }
+    function getParameterByName(name) {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const sortOrder = getParameterByName("sortOrder");
+        if (sortOrder) {
+            document.getElementById("sortOrder").value = sortOrder;
         }
-        function getParameterByName(name) {
-            const url = new URL(window.location.href);
-            return url.searchParams.get(name);
+
+        var params = new URLSearchParams(window.location.search);
+
+        // Xử lý checkbox "MaLoaiSP"
+        var maloaispValues = params.getAll("MaLoaiSP");
+        if (maloaispValues.length > 0) {
+            var checkboxes = document.querySelectorAll('input[name="MaLoaiSP"]');
+            checkboxes.forEach(function (checkbox) {
+                if (maloaispValues.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
         }
-        document.addEventListener("DOMContentLoaded", function () {
-            const sortOrder = getParameterByName("sortOrder");
-            if (sortOrder) {
-                document.getElementById("sortOrder").value = sortOrder;
-            }
-            var params = new URLSearchParams(window.location.search);
-            // Xử lý MaLoaiSP
-            var maloaispValues = params.getAll("MaLoaiSP");
-            if (maloaispValues.length > 0) {
-                var checkboxes = document.querySelectorAll('input[name="MaLoaiSP"]');
-                checkboxes.forEach(function (checkbox) {
-                    if (maloaispValues.includes(checkbox.value)) {
-                        checkbox.checked = true;
-                    }
-                });
-            }
-            // Xử lý Ram
-            var ramValues = params.getAll("Ram");
-            if (ramValues.length > 0) {
-                var checkboxes = document.querySelectorAll('input[name="Ram"]');
-                checkboxes.forEach(function (checkbox) {
-                    if (ramValues.includes(checkbox.value)) {
-                        checkbox.checked = true;
-                    }
-                });
-            }
-            // Xử lý Memory
-            var memoryValues = params.getAll("Memory");
-            if (memoryValues.length > 0) {
-                var checkboxes = document.querySelectorAll('input[name="Memory"]');
-                checkboxes.forEach(function (checkbox) {
-                    if (memoryValues.includes(checkbox.value)) {
-                        checkbox.checked = true;
-                    }
-                });
-            }
-            // Xử lý ScreenSize
-            var screenValues = params.getAll("ScreenSize");
-            if (screenValues.length > 0) {
-                var checkboxes = document.querySelectorAll('input[name="ScreenSize"]');
-                checkboxes.forEach(function (checkbox) {
-                    if (screenValues.includes(checkbox.value)) {
-                        checkbox.checked = true;
-                    }
-                });
-            }
-            // Xử lý MaTH
-            var mathValues = params.getAll("MaTH");
-            if (mathValues.length > 0) {
-                var checkboxes = document.querySelectorAll('input[name="MaTH"]');
-                checkboxes.forEach(function (checkbox) {
-                    if (mathValues.includes(checkbox.value)) {
-                        checkbox.checked = true;
-                    }
-                });
-            }
-        });
-        function sortProduct(sortInfor) {
-            var currentUrl = window.location.href;
-            var cleanUrl = currentUrl.replace(/([?&]sortOrder=[^&]*)/, '');
-            var newUrl = cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'sortOrder=' + sortInfor;
-            window.location.href = newUrl;
+
+        // Xử lý checkbox "Ram"
+        var ramValues = params.getAll("Ram");
+        if (ramValues.length > 0) {
+            var checkboxes = document.querySelectorAll('input[name="Ram"]');
+            checkboxes.forEach(function (checkbox) {
+                if (ramValues.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
         }
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
-</html>
-y
+
+        // Xử lý checkbox "Memory"
+        var memoryValues = params.getAll("Memory");
+        if (memoryValues.length > 0) {
+            var checkboxes = document.querySelectorAll('input[name="Memory"]');
+            checkboxes.forEach(function (checkbox) {
+                if (memoryValues.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+        }
+
+        // Xử lý checkbox "ScreenSize"
+        var screenValues = params.getAll("ScreenSize");
+        if (screenValues.length > 0) {
+            var checkboxes = document.querySelectorAll('input[name="ScreenSize"]');
+            checkboxes.forEach(function (checkbox) {
+                if (screenValues.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+        }
+
+        // Xử lý checkbox "MaTH"
+        var mathValues = params.getAll("MaTH");
+        if (mathValues.length > 0) {
+            var checkboxes = document.querySelectorAll('input[name="MaTH"]');
+            checkboxes.forEach(function (checkbox) {
+                if (mathValues.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+        }
+    });
+
+    function sortProduct(sortInfor) {
+        var currentUrl = window.location.href;
+        var cleanUrl = currentUrl.replace(/([?&]sortOrder=[^&]*)/, '');
+        var newUrl = cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'sortOrder=' + sortInfor;
+        window.location.href = newUrl;
+    }
+</script>
