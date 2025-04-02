@@ -32,21 +32,8 @@
     </div>
 </div>
 <!-- End mainmenu area -->
-
-<!-- Advertisement popup --> 
+<!-- Advertisement popup -->
 @await Html.PartialAsync("overlay")
-
-<div class="product-big-title-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product-bit-title text-center">
-                    <h2>Trang chủ</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="slider-area">
     <!-- Slider -->
@@ -54,19 +41,27 @@
         <ul class="" id="bxslider-home4">
             <li>
                 <img src="~/img/slide.png" alt="Slide" />
-                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                <a class="caption button-radius" href="#">
+                    <span class="icon"></span>Shop now
+                </a>
             </li>
             <li>
                 <img src="~/img/slide2.png" alt="Slide" />
-                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                <a class="caption button-radius" href="#">
+                    <span class="icon"></span>Shop now
+                </a>
             </li>
             <li>
                 <img src="~/img/slide3.png" alt="Slide" />
-                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                <a class="caption button-radius" href="#">
+                    <span class="icon"></span>Shop now
+                </a>
             </li>
             <li>
                 <img src="~/img/slide4.png" alt="Slide" />
-                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                <a class="caption button-radius" href="#">
+                    <span class="icon"></span>Shop now
+                </a>
             </li>
         </ul>
     </div>
@@ -80,47 +75,49 @@
             <div class="col-md-12">
                 <div class="latest-product">
                     <h2 class="section-title">Sản phẩm mới nhất</h2>
-                    <div class="product-carousel">
+                    <div class="products-container">
                         @foreach (var item in ListSP)
                         {
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="@item.GetType().GetProperty("HinhAnh").GetValue(item,null).ToString()" alt="" />
-                                    <div class="product-hover">
-                                        <a href="/GioHang/InsertCart3?id=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()" class="add-to-cart-link">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            Thêm vào giỏ
-                                        </a>
-                                        <a href="/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()&l=@item.GetType().GetProperty("MaLoaiSP").GetValue(item,null).ToString()"
-                                           class="view-details-link">
-                                            <i class="fa fa-link"></i> Xem
-                                            chi tiết
-                                        </a>
-                                    </div>
+                            <div class="product-item" onclick="window.location.href='/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()&l=@item.GetType().GetProperty("MaLoaiSP").GetValue(item,null).ToString()'">
+                                <div class="product-image">
+                                    <img src="@item.GetType().GetProperty("HinhAnh").GetValue(item,null)" alt="" />
                                 </div>
 
-                                <h2>
+                                <div class="product-title">
                                     <a href="/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()&l=@item.GetType().GetProperty("MaLoaiSP").GetValue(item,null).ToString()">
-                                        <p>
-                                            @item.GetType().GetProperty("TenSP").GetValue(item, null).ToString()
-                                        </p>
-                                        @item.GetType().GetProperty("MauSac").GetValue(item, null).ToString()-
-                                        @item.GetType().GetProperty("Ram").GetValue(item, null).ToString()GB-
-                                        @item.GetType().GetProperty("BoNhoTrong").GetValue(item, null).ToString()GB
+                                        @item.GetType().GetProperty("TenSP").GetValue(item, null).ToString()
                                     </a>
-                                </h2>
+                                </div>
 
-                                <div class="product-carousel-price">
-                                    @if (int.Parse(item.GetType().GetProperty("GiaKM").GetValue(item, null).ToString()) > 0)
-                                    {
-                                        <del>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</del>
-                                        <br />
-                                        <ins>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("GiaKM").GetValue(item, null))</ins>
-                                    }
-                                    else
-                                    {
-                                        <ins>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</ins>
-                                    }
+                                <div class="product-specs">
+                                    <span class="spec-pill">
+                                        @item.GetType().GetProperty("MauSac").GetValue(item, null).ToString()
+                                    </span>
+                                    <span class="spec-pill">
+                                        @item.GetType().GetProperty("Ram").GetValue(item, null).ToString()GB
+                                    </span>
+                                    <span class="spec-pill">
+                                        @item.GetType().GetProperty("BoNhoTrong").GetValue(item, null).ToString()GB
+                                    </span>
+                                </div>
+
+                                <div class="price-cart-container">
+                                    <div class="product-price">
+                                        @if (int.Parse(item.GetType().GetProperty("GiaKM").GetValue(item, null).ToString()) > 0)
+                                        {
+                                            <span class="original-price">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</span>
+                                            <span class="sale-price">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("GiaKM").GetValue(item, null))</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="sale-price">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</span>
+                                        }
+                                    </div>
+
+                                    <a href="/GioHang/InsertCart3?id=@item.GetType().GetProperty("MaTTSP").GetValue(item,null).ToString()"
+                                       class="cart-button" onclick="event.stopPropagation();">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </a>
                                 </div>
                             </div>
                         }
@@ -130,7 +127,6 @@
         </div>
     </div>
 </div>
-<!-- End main content area -->
 
 <div class="brands-area">
     <div class="zigzag-bottom"></div>
@@ -140,21 +136,22 @@
                 <h2 class="section-title" style="color: black">
                     Danh sách các hãng
                 </h2>
-                    <div class="brand-list">
-                        <img src="~/img/brand1.png" alt="" />
-                        <img src="~/img/brand2.png" alt="" />
-                        <img src="~/img/brand3.png" alt="" />
-                        <img src="~/img/brand4.png" alt="" />
-                        <img src="~/img/brand5.png" alt="" />
-                        <img src="~/img/brand6.png" alt="" />
-                        <img src="~/img/brand1.png" alt="" />
-                        <img src="~/img/brand2.png" alt="" />
-                    </div>
+                <div class="brand-list">
+                    <img src="~/img/brand1.png" alt="" />
+                    <img src="~/img/brand2.png" alt="" />
+                    <img src="~/img/brand3.png" alt="" />
+                    <img src="~/img/brand4.png" alt="" />
+                    <img src="~/img/brand5.png" alt="" />
+                    <img src="~/img/brand6.png" alt="" />
+                    <img src="~/img/brand1.png" alt="" />
+                    <img src="~/img/brand2.png" alt="" />
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!--<<Châu>>-->
+
+<!--<<Chân>>-->
 <!--Xử lý overlay Adv-->
 <script>
     function showAd() {
