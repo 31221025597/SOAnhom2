@@ -9,7 +9,6 @@
     KhachHang kh = ViewBag.KH;
     Pager pager = new Pager();
 
-
     int pageNo = 0;
     if (ViewBag.Pager != null)
     {
@@ -17,50 +16,130 @@
         pageNo = pager.CurrentPage;
     }
 }
-<div class="mainmenu-area">
-    <div class="container">
-        <div class="row">
-            <div class="navbar-header">
-                <button type="button"
-                        class="navbar-toggle"
-                        data-toggle="collapse"
-                        data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/Home/Index">Trang chủ</a></li>
-                    <li class="active">
-                        <a href="/SanPham/Products">Sản phẩm</a>
-                    </li>
-                    <li><a href="/TinTuc/DanhSachTinTuc">Tin tức</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End mainmenu area -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"] - My Shop</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        /* Các style dùng cho giao diện sản phẩm */
+        .product-card {
+            margin-bottom: 20px;
+        }
 
-<div class="product-big-title-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product-bit-title text-center">
-                    <h2>Danh sách sản phẩm</h2>
+        .card {
+            border: 1px solid #ddd;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            border-radius: 8px; /* Bo tròn nhẹ */
+            overflow: hidden; /* Đảm bảo các phần tử bên trong không vượt ra ngoài */
+            height: 100%; /* Đồng nhất chiều cao card */
+        }
+
+            .card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: cover; /* Làm đầy khung hình mà không làm méo ảnh */
+            width: 100%;
+        }
+
+        .card-body {
+            text-align: center;
+            min-height: 150px; /* Đảm bảo đồng nhất kích thước phần thân card */
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 1rem;
+        }
+
+        .price del {
+            font-size: 1.2rem;
+        }
+
+        .price ins {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .card-footer {
+            background: #fff;
+            border-top: none;
+            text-align: center;
+            padding: 10px;
+        }
+
+            .card-footer .btn {
+                border-radius: 20px;
+                padding: 8px 20px;
+                font-size: 1rem;
+                transition: background 0.3s ease, transform 0.3s ease;
+            }
+
+                .card-footer .btn:hover {
+                    transform: scale(1.05);
+                }
+        /* Kiểu icon cart: dùng glyphicon của Bootstrap */
+        .btn .glyphicon-shopping-cart {
+            margin-right: 5px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Menu Area -->
+    <div class="mainmenu-area">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button"
+                            class="navbar-toggle"
+                            data-toggle="collapse"
+                            data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/Home/Index">Trang chủ</a></li>
+                        <li class="active"><a href="/SanPham/Products">Sản phẩm</a></li>
+                        <li><a href="/TinTuc/DanhSachTinTuc">Tin tức</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- End mainmenu area -->
+    <!-- Title Area -->
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Danh sách sản phẩm</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="single-product-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
+    <!-- Content Area -->
+    <div class="single-product-area">
+        <div class="container">
+            <!-- Search và Sắp xếp -->
+            <div class="row">
                 <div class="col-sm-9">
                     <form action="/SanPham/Products">
                         <input type="search" name="search" class="form-control" placeholder="Search" style="float: left; width: 80%; margin-bottom: 20px;" />
@@ -82,39 +161,31 @@
                 </div>
             </div>
 
-        <div class="row">
-            <div class="col-sm-3">
-
+            <div class="row">
+                <!-- Bộ lọc sản phẩm -->
+                <div class="col-sm-3">
                     <form action="/SanPham/Products" method="get">
-
-                    <div class="left-sidebar">
-                        <div class="panel-group category-products" id="accordian">
+                        <div class="left-sidebar">
+                            <div class="panel-group category-products" id="accordian">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                            <a data-toggle="collapse"
-                                               data-parent="#accordian"
-                                               href="#ram">
-                                                <span class="badge pull-right">
-                                                    <i class="fa fa-plus"></i>
-                                                </span>
-                                                <STRONG>BỘ LỌC</STRONG>
+                                            <a data-toggle="collapse" data-parent="#accordian" href="#ram">
+                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                <strong>BỘ LỌC</strong>
                                             </a>
                                         </h3>
                                     </div>
-                                    <div id="ram"
-                                         class="panel-collapse collapse">
+                                    <div id="ram" class="panel-collapse collapse">
                                         <div class="panel-body">
+                                            <!-- Loại sản phẩm -->
                                             <div class="panel-heading">
-                                                <h3 class="panel-title">
-                                                    <b>
-                                                        Loại sản phẩm
-                                                    </b>
-                                                </h3>
+                                                <h3 class="panel-title"><b>Loại sản phẩm</b></h3>
                                             </div>
                                             <div class="panel-body">
                                                 <ul style="list-style:none">
-                                                    @foreach (var hang in ModelLoaiSP){
+                                                    @foreach (var hang in ModelLoaiSP)
+                                                    {
                                                         <li>
                                                             <input type="checkbox" name="MaLoaiSP" value="@hang.GetType().GetProperty("MaLoaiSP").GetValue(hang, null)">
                                                             @hang.GetType().GetProperty("TenLoaiSP").GetValue(hang, null).ToString()
@@ -123,10 +194,9 @@
                                                 </ul>
                                             </div>
                                             <hr />
+                                            <!-- Ram -->
                                             <div class="panel-heading">
-                                                <h3 class="panel-title">
-                                                    <b>Ram</b>
-                                                </h3>
+                                                <h3 class="panel-title"><b>Ram</b></h3>
                                             </div>
                                             <div class="panel-body">
                                                 <ul style="list-style:none">
@@ -140,10 +210,9 @@
                                                 </ul>
                                             </div>
                                             <hr />
+                                            <!-- Bộ nhớ trong -->
                                             <div class="panel-heading">
-                                                <h3 class="panel-title">
-                                                    <b>Bộ nhớ trong</b>
-                                                </h3>
+                                                <h3 class="panel-title"><b>Bộ nhớ trong</b></h3>
                                             </div>
                                             <div class="panel-body">
                                                 <ul style="list-style:none">
@@ -157,10 +226,9 @@
                                                 </ul>
                                             </div>
                                             <hr />
+                                            <!-- Màn hình -->
                                             <div class="panel-heading">
-                                                <h3 class="panel-title">
-                                                    <b>Màn hình</b>
-                                                </h3>
+                                                <h3 class="panel-title"><b>Màn hình</b></h3>
                                             </div>
                                             <div class="panel-body">
                                                 <ul style="list-style:none">
@@ -174,10 +242,9 @@
                                                 </ul>
                                             </div>
                                             <hr />
+                                            <!-- Hãng -->
                                             <div class="panel-heading">
-                                                <h3 class="panel-title">
-                                                    <b>Hãng</b>
-                                                </h3>
+                                                <h3 class="panel-title"><b>Hãng</b></h3>
                                             </div>
                                             <div class="panel-body">
                                                 <ul style="list-style:none">
@@ -191,158 +258,107 @@
                                                 </ul>
                                             </div>
                                             <hr />
-
                                             <button type="submit" onchange="this.form.submit()">Lọc sản phẩm</button>
-
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
-                    </div>
-
                     </form>
+                </div>
 
-            </div>
-            <div class="col-sm-9 padding-right">
-                @foreach (var item in Model)
-                {
-                    <div class="col-md-4 col-sm-6" style="float: left; height: 450px; padding: 10px; margin-top: 20px; margin-bottom: 20px;">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="@item.GetType().GetProperty("HinhAnh").GetValue(item, null).ToString()" alt="" />
-                            </div>
-                            <h2>
-                                <a href="/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item, null).ToString()&l=@item.GetType().GetProperty("MaLoaiSP").GetValue(item, null)">
-                                    @item.GetType().GetProperty("TenSP").GetValue(item, null).ToString()
-                                </a>
-                            </h2>
-                            <h4>
-                                @item.GetType().GetProperty("MauSac").GetValue(item, null).ToString()-
-                                @item.GetType().GetProperty("Ram").GetValue(item, null).ToString()GB-
-                                @item.GetType().GetProperty("BoNhoTrong").GetValue(item, null).ToString()GB
-                            </h4>
-                            <div class="product-carousel-price">
-                                @if (int.Parse(item.GetType().GetProperty("GiaKM").GetValue(item, null).ToString()) > 0)
-                                {
-                                    <del>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</del>
-                                    <br />
-                                    <ins>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("GiaKM").GetValue(item, null))</ins>
-                                }
-                                else
-                                {
-                                    <del style="height: 74px; width: 150px"></del>
-                                    <ins>@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</ins>
-                                }
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button"
-                                   data-quantity="1"
-                                   data-product_sku=""
-                                   data-product_id="70"
-                                   rel="nofollow"
-                                   href="/SanPham/ChiTietSP?t=@item.GetType().GetProperty("MaTTSP").GetValue(item, null)&l=@item.GetType().GetProperty("MaTH").GetValue(item, null)">
-                                    Xem chi tiết
-                                </a>
+                <!-- Hiển thị sản phẩm -->
+                <div class="col-sm-9 padding-right">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4 col-sm-6 product-card">
+                            <div class="card h-100">
+                                <img src="@item.GetType().GetProperty("HinhAnh").GetValue(item, null).ToString()" class="card-img-top" alt="Hình ảnh sản phẩm">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        @item.GetType().GetProperty("TenSP").GetValue(item, null).ToString()
+                                    </h5>
+                                    <p class="card-text">
+                                        @item.GetType().GetProperty("MauSac").GetValue(item, null).ToString() -
+                                        @item.GetType().GetProperty("Ram").GetValue(item, null).ToString()GB -
+                                        @item.GetType().GetProperty("BoNhoTrong").GetValue(item, null).ToString()GB
+                                    </p>
+                                    <div class="price">
+                                        @if (int.Parse(item.GetType().GetProperty("GiaKM").GetValue(item, null).ToString()) > 0)
+                                        {
+                                            <p><del class="text-muted">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</del></p>
+                                            <p><ins class="text-danger">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("GiaKM").GetValue(item, null))</ins></p>
+                                        }
+                                        else
+                                        {
+                                            <p><ins class="text-primary">@string.Format("{0:0,0 đ}", item.GetType().GetProperty("Gia").GetValue(item, null))</ins></p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-success add-to-cart" data-id="@item.GetType().GetProperty("MaTTSP").GetValue(item, null)">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> Thêm vào giỏ hàng
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product-pagination text-center">
-                    <nav>
-                        @if (pager.TotalPages > 0)
-
-                        {
-                            <ul class="pagination">
-                                <!-- Link đến Trang trước -->
-                                <li>
-                                    <a href="javascript:void(0);" onclick="navigatePage(@(pager.CurrentPage - 1))" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-
-                                <!-- Liệt kê các trang -->
-                                @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
-
-                                {
-                                    <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
-                                        <a class="page-link" href="javascript:void(0);" onclick="navigatePage(@pge)">@pge</a>
+            <!-- Phân trang -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-pagination text-center">
+                        <nav>
+                            @if (pager.TotalPages > 0)
+                            {
+                                <ul class="pagination">
+                                    <li>
+                                        <a href="javascript:void(0);" onclick="navigatePage(@(pager.CurrentPage - 1))" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
                                     </li>
-                                }
-
-                                <!-- Link đến Trang sau -->
-                                <li>
-                                    <a href="javascript:void(0);" onclick="navigatePage(@(pager.CurrentPage + 1))" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        }
-                    </nav>
+                                    @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                                    {
+                                        <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
+                                            <a class="page-link" href="javascript:void(0);" onclick="navigatePage(@pge)">@pge</a>
+                                        </li>
+                                    }
+                                    <li>
+                                        <a href="javascript:void(0);" onclick="navigatePage(@(pager.CurrentPage + 1))" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
-
-
     </div>
-</div>
 
-<script>
+    <!-- Script xử lý phân trang, sắp xếp và lọc -->
+    <script>
         function navigatePage(pageNumber) {
-            // Lấy URL hiện tại của trang
             var currentUrl = window.location.href;
-
-            // Xóa bất kỳ tham số pg nào hiện có trong URL để tránh trùng lặp
             var cleanUrl = currentUrl.replace(/([?&]pg=\d+)/, '');
-
-            // Thêm tham số pg mới vào URL
             var newUrl = cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'pg=' + pageNumber;
-
-            // Điều hướng đến URL mới
             window.location.href = newUrl;
         }
-
         function getParameterByName(name) {
             const url = new URL(window.location.href);
             return url.searchParams.get(name);
         }
-        // Thiết lập giá trị của select khi tải trang
         document.addEventListener("DOMContentLoaded", function () {
-            // Lấy giá trị sortOrder từ URL
             const sortOrder = getParameterByName("sortOrder");
-
-            // Nếu có giá trị sortOrder, thiết lập tùy chọn tương ứng là selected
             if (sortOrder) {
                 document.getElementById("sortOrder").value = sortOrder;
             }
-        });
-        function sortProduct(sortInfor) {
-            // Lấy URL hiện tại của trang
-            var currentUrl = window.location.href;
-
-            // Xóa bất kỳ tham số sortOrder nào hiện có trong URL để tránh trùng lặp
-            var cleanUrl = currentUrl.replace(/([?&]sortOrder=[^&]*)/, '');
-
-            // Thêm tham số sortOrder mới vào URL
-            var newUrl = cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'sortOrder=' + sortInfor;
-
-            // Điều hướng đến URL mới
-            window.location.href = newUrl;
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Lấy tham số "MaLoaiSP" từ URL
             var params = new URLSearchParams(window.location.search);
-            var maloaispValues = params.getAll("MaLoaiSP"); // Sử dụng getAll để lấy tất cả giá trị
-
-            // Nếu có tham số "MaLoaiSP" trong URL
+            // Xử lý MaLoaiSP
+            var maloaispValues = params.getAll("MaLoaiSP");
             if (maloaispValues.length > 0) {
-                // Lặp qua tất cả các checkbox và đánh dấu nếu có giá trị trong URL
                 var checkboxes = document.querySelectorAll('input[name="MaLoaiSP"]');
                 checkboxes.forEach(function (checkbox) {
                     if (maloaispValues.includes(checkbox.value)) {
@@ -350,16 +366,9 @@
                     }
                 });
             }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Lấy tham số "Ram" từ URL
-            var params = new URLSearchParams(window.location.search);
-            var ramValues = params.getAll("Ram"); // Sử dụng getAll để lấy tất cả giá trị
-
-            // Nếu có tham số "Ram" trong URL
+            // Xử lý Ram
+            var ramValues = params.getAll("Ram");
             if (ramValues.length > 0) {
-                // Lặp qua tất cả các checkbox và đánh dấu nếu có giá trị trong URL
                 var checkboxes = document.querySelectorAll('input[name="Ram"]');
                 checkboxes.forEach(function (checkbox) {
                     if (ramValues.includes(checkbox.value)) {
@@ -367,16 +376,9 @@
                     }
                 });
             }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Lấy tham số "Memory" từ URL
-            var params = new URLSearchParams(window.location.search);
-            var memoryValues = params.getAll("Memory"); // Sử dụng getAll để lấy tất cả giá trị
-
-            // Nếu có tham số "Memory" trong URL
+            // Xử lý Memory
+            var memoryValues = params.getAll("Memory");
             if (memoryValues.length > 0) {
-                // Lặp qua tất cả các checkbox và đánh dấu nếu có giá trị trong URL
                 var checkboxes = document.querySelectorAll('input[name="Memory"]');
                 checkboxes.forEach(function (checkbox) {
                     if (memoryValues.includes(checkbox.value)) {
@@ -384,16 +386,9 @@
                     }
                 });
             }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Lấy tham số "ScreenSize" từ URL
-            var params = new URLSearchParams(window.location.search);
-            var screenValues = params.getAll("ScreenSize"); // Sử dụng getAll để lấy tất cả giá trị
-
-            // Nếu có tham số "ScreenSize" trong URL
+            // Xử lý ScreenSize
+            var screenValues = params.getAll("ScreenSize");
             if (screenValues.length > 0) {
-                // Lặp qua tất cả các checkbox và đánh dấu nếu có giá trị trong URL
                 var checkboxes = document.querySelectorAll('input[name="ScreenSize"]');
                 checkboxes.forEach(function (checkbox) {
                     if (screenValues.includes(checkbox.value)) {
@@ -401,16 +396,9 @@
                     }
                 });
             }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Lấy tham số "MaTH" từ URL
-            var params = new URLSearchParams(window.location.search);
-            var mathValues = params.getAll("MaTH"); // Sử dụng getAll để lấy tất cả giá trị
-
-            // Nếu có tham số "MaTH" trong URL
+            // Xử lý MaTH
+            var mathValues = params.getAll("MaTH");
             if (mathValues.length > 0) {
-                // Lặp qua tất cả các checkbox và đánh dấu nếu có giá trị trong URL
                 var checkboxes = document.querySelectorAll('input[name="MaTH"]');
                 checkboxes.forEach(function (checkbox) {
                     if (mathValues.includes(checkbox.value)) {
@@ -419,5 +407,15 @@
                 });
             }
         });
-</script>
-
+        function sortProduct(sortInfor) {
+            var currentUrl = window.location.href;
+            var cleanUrl = currentUrl.replace(/([?&]sortOrder=[^&]*)/, '');
+            var newUrl = cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'sortOrder=' + sortInfor;
+            window.location.href = newUrl;
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
+y

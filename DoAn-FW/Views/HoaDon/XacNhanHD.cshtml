@@ -217,56 +217,51 @@
                 Tổng tiền phải thanh toán: @string.Format("{0:0,0 đ}", TTPhaiTra)
             </div>
 
-                                <tr>
-                                    <td align="left" style="padding-top: 0px;">
-                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                                            <tr style="color: #ff7361;">
-                                                <td width="75%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
-                                                    Tổng tiền phải thanh toán
-                                                </td>
-                                                <td width="25%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;"> @string.Format("{0:0,0 đ}", TTPhaiTra) </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left" height="100%" valign="top" width="100%" style="padding: 0 35px 0px 35px; background-color: #ffffff;" bgcolor="#ffffff">
-                            <div style="display:inline-block; max-width:100%; min-width:240px; vertical-align:top; width:100%;">
-                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:530px;">
-                                    <tr>
-                                        <td align="left" valign="top" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; ">
-                                            <p style="font-weight: 800; font-size: 18px;">Địa chỉ giao hàng</p>
-                                            <input type="text" name="DiaChi" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left" height="100%" valign="top" width="100%" style="padding: 0 35px 35px 35px; background-color: #ffffff;" bgcolor="#ffffff">
-                            <div style="display:inline-block; max-width:100%; min-width:240px; vertical-align:top; width:100%;">
-                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
-                                    <tr>
-                                        <td align="left" valign="top" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; ">
-                                            <p style="font-weight: 800; font-size: 18px;">Ngày lập hóa đơn:</p>
-                                            <p>@DateTime.Now.ToString("dd-MM-yyyy")</p>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center" style="border-radius: 5px;" bgcolor="white">
-                            <input type="submit" value="Xác nhận" style="font-size: 18px; font-family: 'Times New Roman', Times, serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #01b500; padding: 15px 30px; border: 0px solid #F44336; display: block;">
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</form>
+            <tr>
+                <td align="left" style="padding-top: 0px;">
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr style="color: #ff7361;">
+                            <td width="75%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
+                                Tổng tiền phải thanh toán
+                            </td>
+                            <td width="25%" align="left" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;"> @string.Format("{0:0,0 đ}", TTPhaiTra) </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" height="100%" valign="top" width="100%" style="padding: 0 35px 0px 35px; background-color: #ffffff;" bgcolor="#ffffff">
+                    <div style="display:inline-block; max-width:100%; min-width:240px; vertical-align:top; width:100%;">
+                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:530px;">
+                            <tr>
+                                <td align="left" valign="top" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; ">
+                                    <p style="font-weight: 800; font-size: 18px;">Địa chỉ giao hàng</p>
+                                    <input type="text" name="DiaChi" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" height="100%" valign="top" width="100%" style="padding: 0 35px 35px 35px; background-color: #ffffff;" bgcolor="#ffffff">
+                    <div style="display:inline-block; max-width:100%; min-width:240px; vertical-align:top; width:100%;">
+                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
+                            <tr>
+                                <td align="left" valign="top" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: 400; line-height: 24px; ">
+                                    <p style="font-weight: 800; font-size: 18px;">Ngày lập hóa đơn:</p>
+                                    <p>@DateTime.Now.ToString("dd-MM-yyyy")</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" style="border-radius: 5px;" bgcolor="white">
+                    <input type="submit" value="Xác nhận" style="font-size: 18px; font-family: 'Times New Roman', Times, serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #01b500; padding: 15px 30px; border: 0px solid #F44336; display: block;">
+                </td>
+            </tr>
+        </form>
+    </div>
+</div>
