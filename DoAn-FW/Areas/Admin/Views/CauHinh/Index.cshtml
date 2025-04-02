@@ -1,16 +1,60 @@
-﻿@{
-    <div class="content-wrapper" style="min-height: 639px;">
-        <section class="content-header">
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cấu Hình Hệ Thống</title>
+    <!-- Sử dụng Bootstrap 4 và FontAwesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .content-wrapper {
+            padding: 20px;
+        }
+        .card {
+            border: none;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #eef1f5;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .breadcrumb {
+            background-color: transparent;
+            margin-bottom: 0;
+        }
+        .timeline {
+            list-style: none;
+            padding-left: 0;
+        }
+        .timeline li {
+            margin-bottom: 10px;
+        }
+        .badge-primary {
+            background-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <section class="content-header mb-4">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-md-6">
                         <h1><i class="fa fa-cogs"></i> Cấu Hình Hệ Thống</h1>
                     </div>
                     <div class="col-md-6">
-                        <ol class="breadcrumb brcb float-right">
-                            <li class="breadcrumb-item"><a href="/Admin/HomeAdmin/Index"><i class="fa fa-home"></i> Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Cấu hình</li>
-                        </ol>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb float-right">
+                                <li class="breadcrumb-item">
+                                    <a href="/Admin/HomeAdmin/Index"><i class="fa fa-home"></i> Trang chủ</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Cấu hình</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -20,23 +64,21 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="admin-card" id="view">
-                        <div class="box-header with-border">
-                            <h3 class="box-title text-primary">
+                    <div class="admin-card card shadow-sm" id="view">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 class="text-primary mb-0">
                                 <i class="fa fa-wrench"></i> Thiết lập cấu hình hệ thống
                             </h3>
-                            <div class="box-tools pull-right">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-save"></i> Lưu thay đổi
-                                </button>
-                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-save"></i> Lưu thay đổi
+                            </button>
                         </div>
 
-                        <div class="box-body">
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <div class="card">
-                                        <div class="card-header bg-light">
+                                    <div class="card shadow-sm">
+                                        <div class="card-header">
                                             <h4><i class="fa fa-envelope"></i> Cấu hình Email</h4>
                                         </div>
                                         <div class="card-body">
@@ -80,8 +122,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="card mt-4">
-                                        <div class="card-header bg-light">
+                                    <div class="card shadow-sm">
+                                        <div class="card-header">
                                             <h4><i class="fa fa-globe"></i> Cấu hình Website</h4>
                                         </div>
                                         <div class="card-body">
@@ -111,12 +153,12 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-header bg-light">
+                                    <div class="card shadow-sm">
+                                        <div class="card-header">
                                             <h4><i class="fa fa-info-circle"></i> Thông tin hỗ trợ</h4>
                                         </div>
                                         <div class="card-body">
-                                            <div class="alert alert-info">
+                                            <div class="alert alert-info" role="alert">
                                                 <h5><i class="fa fa-lightbulb"></i> Lưu ý:</h5>
                                                 <p>Các thông tin cấu hình ảnh hưởng trực tiếp đến hoạt động của hệ thống.</p>
                                                 <p>Hãy đảm bảo thông tin chính xác trước khi lưu.</p>
@@ -128,19 +170,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="card mt-4">
-                                        <div class="card-header bg-light">
+                                    <div class="card shadow-sm">
+                                        <div class="card-header">
                                             <h4><i class="fa fa-history"></i> Lịch sử thay đổi</h4>
                                         </div>
                                         <div class="card-body">
                                             <ul class="timeline">
                                                 <li>
                                                     <span class="badge badge-primary">01/04/2025</span>
-                                                    <p>Cập nhật mô tả website</p>
+                                                    <p class="mb-0">Cập nhật mô tả website</p>
                                                 </li>
                                                 <li>
                                                     <span class="badge badge-primary">24/03/2025</span>
-                                                    <p>Thay đổi email hệ thống</p>
+                                                    <p class="mb-0">Thay đổi email hệ thống</p>
                                                 </li>
                                             </ul>
                                         </div>
@@ -149,10 +191,14 @@
                             </div>
                         </div>
 
-                        <div class="box-footer">
+                        <div class="card-footer">
                             <div class="text-right">
-                                <button type="reset" class="btn btn-default"><i class="fa fa-undo"></i> Khôi phục</button>
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu thay đổi</button>
+                                <button type="reset" class="btn btn-default">
+                                    <i class="fa fa-undo"></i> Khôi phục
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-save"></i> Lưu thay đổi
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -161,7 +207,7 @@
         </section>
     </div>
 
-    <!-- JavaScript to toggle password visibility -->
+    <!-- JavaScript bật/tắt hiển thị mật khẩu -->
     <script>
         function togglePassword() {
             var passwordField = document.getElementById("mail_ht_password");
@@ -174,4 +220,11 @@
             }
         }
     </script>
-}
+
+    <!-- Include Bootstrap JS và các thư viện hỗ trợ -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
