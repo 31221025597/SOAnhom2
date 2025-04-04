@@ -59,7 +59,10 @@ Bước 1: Tải về và giải nén thư mục
 Bước 2: Tải về và khởi động phần mềm        
 Bước 3: Khởi động Apache và MySQL trên Xampp.
 ![image](https://github.com/user-attachments/assets/af061cb6-8bf4-4db9-9e78-1413cbb5e96a)
-Cần đảm bảo được cả Apache và MySQL đều chạy bạn nhé. 
+
+Cần đảm bảo được cả Apache và MySQL đều khởi động và MySQL đã được cài đặt trong máy, nếu chưa hãy truy cập link sau để xem hướng dẫn cài đặt 
+https://www.youtube.com/watch?v=BxdSUGBs0gM&t=533s
+
 Khi gặp lỗi không truy cập được MySQL, bạn có thể tham khảo link sau: https://www.youtube.com/watch?v=pVG6-FH9zGs&pp=0gcJCfcAhR29_xXO
 
 Bước 4: Chạy tệp DOAN-SW.sln trong thư mục SOAnhom2-master đã giải nén, website sau khi khởi chạy thành công sẽ có giao diện chính như sau:
