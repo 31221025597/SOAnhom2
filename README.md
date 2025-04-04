@@ -11,6 +11,7 @@ Thông tin cơ bản về website SOASHOP
 1. THẠCH THỚI TRẦN NGỌC - thachthoi.31221025597@st.ueh.edu.vn
 2. TRINH NGUYỄN NGỌC TÚ - trinhnguyen.31221024321@st.ueh.edu.vn
 3. CHÂU NGUYỄN PHỤNG - chaunguyen.31221024746@st.ueh.edu.vn
+
 SOASHOP là một website được xây dựng nhằm phục vụ cho môn học Kiến trúc phần mềm hướng dịch vụ. Mục tiêu xây dựng là để thực hành việc triển khai - áp dụng một kiến trúc cụ thể trong lập trình lên một sản phẩm cụ thể.
 #Thông tin kỹ thuật:
 SOASHOP được xây dựng dựa vào mô hình MVC (Model - View - Controller) và là một phần mềm chạy trên Internet.
