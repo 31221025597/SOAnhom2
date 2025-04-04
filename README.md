@@ -1,4 +1,4 @@
-# SOAshop
+![image](https://github.com/user-attachments/assets/aef6fbbe-f8f8-49c1-a427-f918c8ccda65)# SOAshop
 Xin chào bạn đọc, đây là đồ án SOA - Kiến trúc phần mềm hướng dịch vụ của nhóm 2 SE001 - K48 - CTD - UEH. 
 Đồng tác giả của dự án: 
 1. Thới Trần Ngọc Thạch https://github.com/ngocthach041104 
@@ -15,6 +15,22 @@ Thông tin cơ bản về website SOASHOP
 SOASHOP là một website được xây dựng nhằm phục vụ cho môn học Kiến trúc phần mềm hướng dịch vụ. Mục tiêu xây dựng là để thực hành việc triển khai - áp dụng một kiến trúc cụ thể trong lập trình lên một sản phẩm cụ thể.
 #Thông tin kỹ thuật:
 SOASHOP được xây dựng dựa vào mô hình MVC (Model - View - Controller) và là một phần mềm chạy trên Internet.
+   
+   + Kiến trúc tổng thể: SOASHOP được xây dựng dựa trên mô hình MVC (Model-View-Controller), tạo nên một hệ thống bán đồ điện tử với sự phân tách rõ ràng giữa các thành phần, giúp dễ dàng bảo trì và mở rộng.
+   
+   + Tầng Model: Quản lý toàn bộ business logic và tương tác với cơ sở dữ liệu, bao gồm các entity chính như KhachHang, CTHD (Chi tiết hóa đơn), và SanPhamContext, đảm bảo tính toàn vẹn dữ liệu và logic nghiệp vụ.
+   
+   + Tầng Controller: Đóng vai trò điều phối, xử lý các request từ người dùng và tương tác với Model để lấy/cập nhật dữ liệu, sau đó trả về View phù hợp. Các controller chính bao gồm SanPhamController, CartController và AccountController.
+   
+   + Tầng View: Hiển thị giao diện người dùng, được tổ chức theo cấu trúc thư mục rõ ràng với layout chung và các view riêng cho từng chức năng như quản lý sản phẩm, giỏ hàng, và quản lý đơn hàng.
+   
+   + Ưu điểm nổi bật: 
+      - Tuân thủ nguyên lý Separation of Concerns
+      - Cấu trúc project rõ ràng và dễ quản lý
+      - Tích hợp đầy đủ các chức năng cơ bản của một hệ thống thương mại điện tử
+      - Có tài liệu chi tiết bao gồm sơ đồ UseCase, Activity Diagram và Sequence Diagram
+   
+   + Khả năng mở rộng: Kiến trúc cho phép dễ dàng thêm mới các tính năng và module mà không ảnh hưởng đến các thành phần hiện có, đồng thời hỗ trợ việc tích hợp các công nghệ mới trong tương lai.
 
 SOASHOP có cơ sở dữ liệu được xây dựng có thể phục vụ tốt công tác thử nghiệm và cải tiến. 
 Một số chức năng chính mà nhóm đã thực hiện được 
