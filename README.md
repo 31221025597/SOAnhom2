@@ -60,14 +60,25 @@ Bước 3: Khởi động Apache và MySQL trên Xampp.
 Bước 4: Chạy tệp DOAN-SW.sln trong thư mục SOAnhom2-master đã giải nén, website sau khi khởi chạy thành công sẽ có giao diện chính như sau:
 ![image](https://github.com/user-attachments/assets/40e13197-a2af-4067-8329-79f34911e64c)
 Một số hình ảnh của hệ thống 
+
 ![image](https://github.com/user-attachments/assets/2d34a56d-efd9-48e3-90e0-74540a83e32b)
+
 ![image](https://github.com/user-attachments/assets/6c3c53a6-14dd-4f4b-a1c8-f9aedfafdcee)
+
 Quản lý bình luận
+
 ![image](https://github.com/user-attachments/assets/95bb7067-f901-4567-8ff4-e22238cee3e4)
+
 Thông tin tài khoản 
+
 ![image](https://github.com/user-attachments/assets/3e621a12-917d-4609-993b-523a32745ddc)
+
 Quản lý sản phẩm 
+
 ![image](https://github.com/user-attachments/assets/c6409b7d-7193-4493-a711-6db8a5940c2e)
+
 Thống kê
+
 ![image](https://github.com/user-attachments/assets/ab316662-6005-4481-a367-3d1f010998c4)
+
 Cảm ơn bạn đã đọc, chúc bạn một ngày vui vẻ. 
