@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/aef6fbbe-f8f8-49c1-a427-f918c8ccda65)# SOAshop
+![image](https://github.com/user-attachments/assets/9010c909-0ca3-4d4c-b583-500f8b1fb74f) # SOASHOP
 Xin chào bạn đọc, đây là đồ án SOA - Kiến trúc phần mềm hướng dịch vụ của nhóm 2 SE001 - K48 - CTD - UEH. 
 Đồng tác giả của dự án: 
 1. Thới Trần Ngọc Thạch https://github.com/ngocthach041104 
